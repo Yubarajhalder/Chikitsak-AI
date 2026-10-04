@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chikitsak AI — AI-Powered Symptom Analysis & Explanation</title>
+  <meta name="description" content="Chikitsak AI uses machine learning and Google Gemini to analyze patient symptoms and deliver clear, empathetic, educational explanations without autonomous diagnosing." />
+
+  <!-- Google Fonts: Plus Jakarta Sans for premium healthcare typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ========================================================================
+       GLOBAL NAVBAR
+       ======================================================================== -->
+  <header class="site-navbar">
+    <div class="container navbar-inner">
+      <div class="brand-link" data-action="go-home">
+        <div class="brand-icon-wrapper">
+          <i data-lucide="cross"></i>
+        </div>
+        <div>
+          <span class="brand-title">Chikitsak <span class="text-gradient">AI</span></span>
+          <span class="brand-badge">Clinical AI</span>
+        </div>
+      </div>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a class="nav-link" data-action="go-home">Home</a></li>
+          <li><a class="nav-link" data-action="scroll-how-it-works">How It Works</a></li>
+          <li><a class="nav-link" data-action="scroll-about">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right-actions">
+        <!-- Live Backend Status Pill -->
+        <div id="backend-status-pill" class="status-pill offline" title="Click to view API settings">
+          <span id="backend-status-dot" class="status-dot"></span>
+          <span id="backend-status-text">Checking API...</span>
+        </div>
+
+        <button type="button" class="btn btn-primary" data-action="start-assessment">
+          <i data-lucide="stethoscope"></i>
+          <span>Start Assessment</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MAIN APPLICATION VIEW ROUTER
+       ======================================================================== -->
+  <main id="app-viewport">
+
+    <!-- ----------------------------------------------------------------------
+         VIEW 1: LANDING PAGE & EDUCATIONAL SECTIONS
+         ---------------------------------------------------------------------- -->
+    <div id="view-landing" class="view-panel active">
+      
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <div class="container">
+          <div class="hero-grid">
+            
+            <div class="hero-left-content">
+              <div class="hero-pill-badge">
+                <i data-lucide="sparkles"></i>
+                <span>132 Clinical Features &bull; SVM Machine Learning</span>
+              </div>
+
+              <h1 class="hero-heading">
+                Understand Your Symptoms <span class="text-gradient">With AI</span>
+              </h1>
+
+              <p class="hero-subtitle">
+                Chikitsak AI uses machine learning to analyze the symptoms you provide and generate a simple explanation of the model's prediction.
+              </p>
+
+              <div class="hero-cta-group">
+                <button type="button" class="btn btn-primary btn-lg" data-action="start-assessment">
+                  <i data-lucide="play-circle"></i>
+                  <span>Start Symptom Assessment</span>
+                </button>
+                <button type="button" class="btn btn-secondary btn-lg" data-action="scroll-how-it-works">
+                  <i data-lucide="info"></i>
+                  <span>How It Works</span>
+                </button>
+              </div>
+
+              <!-- Medical Disclaimer Note -->
+              <div class="hero-disclaimer-card">
+                <i data-lucide="shield-alert"></i>
+                <span>AI-generated information is for educational purposes only and is not a medical diagnosis.</span>
+              </div>
+            </div>
+
+            <!-- HERO RIGHT: Clinical AI Visual -->
+            <div class="hero-visual-card">
+              <div class="visual-top-bar">
+                <div class="visual-system-tag">
+                  <span class="pulse-dot"></span>
+                  <span>Chikitsak Telemetry Engine</span>
+                </div>
+                <span class="flow-tag">Dual-Engine Architecture</span>
+              </div>
+
+              <div class="visual-metric-grid">
+                <div class="metric-box">
+                  <div class="metric-num">132</div>
+                  <div class="metric-label">Biomarker Features</div>
+                </div>
+                <div class="metric-box">
+                  <div class="metric-num">41</div>
+                  <div class="metric-label">Condition Classes</div>
+                </div>
+              </div>
+
+              <div class="visual-ai-radar">
+                <div class="radar-header">
+                  <span>Support Vector Machine (SVM)</span>
+                  <span>Trained Classifier</span>
+                </div>
+                <div class="radar-bar-bg">
+                  <div class="radar-bar-fill"></div>
+                </div>
+              </div>
+
+              <div class="visual-ai-radar" style="background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);">
+                <div class="radar-header">
+                  <span>Google Gemini 3.8 Flash</span>
+                  <span>Patient-Friendly Explainer</span>
+                </div>
+                <div class="radar-bar-bg">
+                  <div class="radar-bar-fill" style="width: 100%; background: linear-gradient(90deg, #0d9488, #0284c7);"></div>
+                </div>
+              </div>
+
+              <div class="visual-flow-tags">
+                <span class="flow-tag">No Data Stored</span>
+                <span class="flow-tag">Zero Prescription Rule</span>
+                <span class="flow-tag">Strict Guardrails</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Quick Stats Ribbon -->
+          <div class="hero-stats-ribbon">
+            <div class="stat-item">
+              <div class="stat-icon"><i data-lucide="layers"></i></div>
+              <div>
+                <div class="stat-title">16 Categories</div>
+                <div class="stat-desc">Targeted symptom screening</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i data-lucide="cpu"></i></div>
+              <div>
+                <div class="stat-title">SVM Classifier</div>
+                <div class="stat-desc">Supervised ML pipeline</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i data-lucide="message-square"></i></div>
+              <div>
+                <div class="stat-title">Gemini Explainer</div>
+                <div class="stat-desc">Empathetic translation layer</div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i data-lucide="lock"></i></div>
+              <div>
+                <div class="stat-title">Privacy First</div>
+                <div class="stat-desc">Zero permanent data storage</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS SECTION -->
+      <section id="how-it-works" class="how-it-works-section">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-tag">Clinical Workflow</span>
+            <h2 class="section-title">How Chikitsak AI Works</h2>
+            <p class="section-subtitle">
+              A transparent, 4-step process combining supervised machine learning with responsible generative AI explanations.
+            </p>
+          </div>
+
+          <div class="steps-grid">
+            <!-- Step 1 -->
+            <div class="step-card">
+              <div class="step-num-pill">01</div>
+              <div class="step-icon-wrap"><i data-lucide="grid"></i></div>
+              <h4>Select Category</h4>
+              <p>Choose the relevant health category matching what you are experiencing to avoid overwhelming symptom lists.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+              <div class="step-num-pill">02</div>
+              <div class="step-icon-wrap"><i data-lucide="check-square"></i></div>
+              <h4>Answer Questions</h4>
+              <p>Answer simple Yes/No questions regarding specific symptoms and clinical risk factors.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+              <div class="step-num-pill">03</div>
+              <div class="step-icon-wrap"><i data-lucide="git-merge"></i></div>
+              <h4>AI Analysis</h4>
+              <p>The selected symptoms are processed by the trained Support Vector Machine model against 132 features.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card">
+              <div class="step-num-pill">04</div>
+              <div class="step-icon-wrap"><i data-lucide="sparkles"></i></div>
+              <h4>Explanation</h4>
+              <p>Gemini provides a simple, structured explanation of the model's prediction in clear patient-friendly language.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about-section" class="about-section">
+        <div class="container">
+          <div class="architecture-card">
+            <span class="section-tag">Architecture & Guardrails</span>
+            <h2>Built with Ethical AI Guardrails</h2>
+            <p style="margin-top: 0.5rem; max-width: 750px;">
+              Chikitsak AI separates predictive statistical inference from patient communication. Gemini never diagnoses independently—its role is strictly to interpret the ML model's prediction clearly and empathetically.
+            </p>
+
+            <div class="arch-dual-grid">
+              <div class="arch-box svm">
+                <h4><i data-lucide="binary" style="color: var(--color-primary);"></i> SVM Classifier Pipeline</h4>
+                <p>
+                  Trained on clinical datasets encompassing 132 distinct symptom features across 41 conditions. It performs non-linear boundary classification to identify statistical correlations between reported symptoms.
+                </p>
+              </div>
+
+              <div class="arch-box gemini">
+                <h4><i data-lucide="bot" style="color: var(--color-accent);"></i> Google Gemini Explanation</h4>
+                <p>
+                  Acts solely as an empathetic medical communicator. Adheres to strict ethical boundaries: never recommends drug dosages, never proclaims definitive medical certainty, and reminds patients to seek human physicians.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ----------------------------------------------------------------------
+         ASSESSMENT FLOW (STEPS 1, 2, 3, LOADING, RESULTS)
+         ---------------------------------------------------------------------- -->
+    <div id="assessment-flow-container" class="container assessment-container hidden">
+
+      <!-- PROGRESS TRACKER BAR -->
+      <div class="assessment-progress-wrapper">
+        <div class="progress-header-flex">
+          <span id="assessment-step-indicator" class="progress-stage-title">Step 1 of 3: Health Category Selection</span>
+          <button type="button" class="btn btn-outline" style="padding: 0.3rem 0.8rem; font-size: 0.82rem;" data-action="go-home">
+            <i data-lucide="arrow-left"></i> Exit to Home
+          </button>
+        </div>
+        <div class="progress-track">
+          <div id="assessment-progress-bar" class="progress-fill" style="width: 33.33%;"></div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           STEP 1: CATEGORY SELECTION
+           ==================================================================== -->
+      <div id="view-step1" class="assessment-step-card active">
+        <div class="step-card-header">
+          <h2>Select Health Category</h2>
+          <p>Choose the category related to your symptoms. You can select one or multiple categories to narrow down questions.</p>
+        </div>
+
+        <div class="category-filter-toolbar">
+          <div class="search-box-wrap">
+            <i data-lucide="search"></i>
+            <input type="text" id="category-search-input" class="search-input" placeholder="Search categories (e.g. Skin, Respiratory, Digestive)..." />
+          </div>
+          <div id="selected-cat-count-badge" class="count-badge">None selected</div>
+        </div>
+
+        <!-- Dynamic Category Cards Grid -->
+        <div id="category-cards-grid" class="category-cards-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="step-action-bar">
+          <button type="button" class="btn btn-secondary" data-action="go-home">
+            <i data-lucide="chevron-left"></i> Cancel
+          </button>
+          <button type="button" id="btn-continue-to-questions" class="btn btn-primary btn-lg disabled" disabled>
+            <span>Continue to Symptom Questions</span>
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           STEP 2: SYMPTOM QUESTIONS
+           ==================================================================== -->
+      <div id="view-step2" class="assessment-step-card hidden">
+        <div class="step-card-header">
+          <h2>Symptom Assessment Questions</h2>
+          <p>Please indicate whether you are experiencing each symptom. Answers are private and evaluated only for this session.</p>
+        </div>
+
+        <!-- Section 1: Selected Category Symptoms -->
+        <div class="symptom-section-subhead">
+          <h3><i data-lucide="activity"></i> Category Symptoms</h3>
+          <button type="button" id="btn-mark-all-no" class="btn btn-outline" style="font-size: 0.82rem; padding: 0.35rem 0.85rem;">
+            Mark Unanswered as "No"
+          </button>
+        </div>
+
+        <div id="symptoms-questions-container" class="questions-container">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Section 2: Common Questions (Risk Factors) -->
+        <div class="symptom-section-subhead" style="margin-top: 2.5rem;">
+          <h3><i data-lucide="clipboard-list"></i> Clinical Risk Factors</h3>
+          <span class="text-muted" style="font-size: 0.85rem;">Common medical background indicators</span>
+        </div>
+
+        <div id="common-questions-container" class="questions-container">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="step-action-bar">
+          <button type="button" id="btn-back-to-categories" class="btn btn-secondary">
+            <i data-lucide="chevron-left"></i> Back to Categories
+          </button>
+          
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <span id="symptoms-answered-counter" class="count-badge">0 Symptoms Reported</span>
+            <button type="button" id="btn-continue-to-review" class="btn btn-primary btn-lg disabled" disabled>
+              <span>Continue to Review</span>
+              <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           STEP 3: REVIEW SYMPTOMS
+           ==================================================================== -->
+      <div id="view-step3" class="assessment-step-card hidden">
+        <div class="step-card-header">
+          <h2>Review Your Symptoms</h2>
+          <p>Review the symptoms and clinical indicators you reported. You can modify any item before generating the prediction.</p>
+        </div>
+
+        <div class="review-subhead">
+          <h3>Reported Symptoms (Answered "Yes")</h3>
+          <span id="review-total-count" class="count-badge highlight">0 Reported</span>
+        </div>
+
+        <div id="review-reported-symptoms-list" class="reported-chips-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="review-subhead" style="margin-top: 2rem;">
+          <h3>Clinical Context & Risk Factors</h3>
+        </div>
+
+        <div id="review-common-factors-list" class="review-common-list">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="step-action-bar">
+          <button type="button" id="btn-edit-answers" class="btn btn-secondary">
+            <i data-lucide="edit-3"></i> Modify Answers
+          </button>
+          <button type="button" id="btn-analyze-symptoms" class="btn btn-primary btn-lg">
+            <i data-lucide="cpu"></i>
+            <span>Analyze Symptoms</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           LOADING SCREEN (ANALYSIS LOADER)
+           ==================================================================== -->
+      <div id="view-loading" class="assessment-step-card hidden">
+        <div class="analysis-loader-container">
+          
+          <div class="pulse-radar-container">
+            <div class="radar-outer-ring"></div>
+            <div class="radar-inner-icon">
+              <i data-lucide="activity"></i>
+            </div>
+          </div>
+
+          <h3 class="loader-title">Analyzing Your Health Profile</h3>
+          <p id="loading-dynamic-step" class="loader-subtitle">
+            Analyzing your reported symptoms against 132 clinical features...
+          </p>
+
+          <div class="loader-disclaimer-notice">
+            <i data-lucide="lock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i>
+            Calculating statistical model patterns &bull; Not a medical diagnosis
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           RESULTS PAGE
+           ==================================================================== -->
+      <div id="view-results" class="assessment-step-card hidden">
+        
+        <div class="results-header-banner">
+          <span class="section-tag">Assessment Complete</span>
+          <h1>AI Assessment Result</h1>
+          <p id="result-timestamp" class="results-meta-timestamp">Report generated just now</p>
+        </div>
+
+        <!-- 1. Possible Condition Card (SVM Model Output) -->
+        <div class="prediction-card">
+          <div class="pred-top-flex">
+            <span class="pred-label">Possible Condition</span>
+            <div class="pred-safety-badge">
+              <i data-lucide="alert-circle"></i>
+              <span>AI Prediction — Not a Confirmed Diagnosis</span>
+            </div>
+          </div>
+
+          <h2 id="result-condition-name" class="pred-condition-heading">Evaluating...</h2>
+
+          <p class="pred-statement">
+            The model identified this as the most likely condition based on the symptoms provided.
+          </p>
+
+          <div class="reported-symptoms-section">
+            <h5>Reported Symptoms Analyzed</h5>
+            <div id="result-reported-symptoms-chips" class="result-chips-wrap">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Gemini Explanation Card (Structured Sections) -->
+        <div class="explanation-card">
+          <div class="card-title-flex">
+            <h3><i data-lucide="sparkles" style="color: var(--color-accent);"></i> What It Means</h3>
+            <span class="powered-by-gemini-pill">
+              <i data-lucide="bot"></i> Formulated by Gemini AI
+            </span>
+          </div>
+
+          <div class="structured-sections-grid">
+            
+            <!-- Section: What It Means -->
+            <div class="explanation-section-block">
+              <div class="exp-block-header">
+                <div class="exp-block-icon"><i data-lucide="book-open"></i></div>
+                <h4>What It Means</h4>
+              </div>
+              <div id="explanation-what-it-means" class="exp-block-content">Loading explanation...</div>
+            </div>
+
+            <!-- Section: Why The AI Predicted This -->
+            <div class="explanation-section-block">
+              <div class="exp-block-header">
+                <div class="exp-block-icon"><i data-lucide="git-commit"></i></div>
+                <h4>Why The AI Predicted This</h4>
+              </div>
+              <div id="explanation-why-predicted" class="exp-block-content">Loading rationale...</div>
+            </div>
+
+            <!-- Section: What You Should Know -->
+            <div class="explanation-section-block">
+              <div class="exp-block-header">
+                <div class="exp-block-icon"><i data-lucide="heart-pulse"></i></div>
+                <h4>What You Should Know</h4>
+              </div>
+              <div id="explanation-what-to-know" class="exp-block-content">Loading guidance...</div>
+            </div>
+
+            <!-- Section: Important Notice -->
+            <div class="explanation-section-block notice-block">
+              <div class="exp-block-header">
+                <div class="exp-block-icon"><i data-lucide="info"></i></div>
+                <h4>Important Notice</h4>
+              </div>
+              <div id="explanation-important-notice" class="exp-block-content">Loading notice...</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3. Distinct Medical Disclaimer Notice Card -->
+        <div class="disclaimer-card">
+          <div class="disclaimer-icon-wrap">
+            <i data-lucide="alert-triangle"></i>
+          </div>
+          <div class="disclaimer-body">
+            <h4>Important Notice</h4>
+            <p>
+              Chikitsak AI provides an AI-generated statistical prediction based on the symptoms entered. This is not a confirmed medical diagnosis and should not replace advice from a qualified healthcare professional.
+            </p>
+            <p>
+              If symptoms are severe, sudden, or getting worse, seek appropriate medical attention immediately. No medication dosages or clinical prescriptions are provided.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. Result Actions -->
+        <div class="results-actions-bar">
+          <button type="button" id="btn-start-new" class="btn btn-primary btn-lg">
+            <i data-lucide="rotate-ccw"></i>
+            <span>Start New Assessment</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-lg" data-action="go-home">
+            <i data-lucide="home"></i>
+            <span>Back to Home</span>
+          </button>
+          <button type="button" id="btn-print-report" class="btn btn-outline btn-lg" onclick="window.print()">
+            <i data-lucide="printer"></i>
+            <span>Print / Save Result</span>
+          </button>
+        </div>
+
+        <div class="privacy-reassurance">
+          <i data-lucide="shield-check"></i>
+          <span>Privacy Assured: Chikitsak AI does not store sensitive personal health information.</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <div class="brand-link" style="margin-bottom: 0.75rem;">
+            <div class="brand-icon-wrapper" style="width: 36px; height: 36px;">
+              <i data-lucide="cross"></i>
+            </div>
+            <span class="brand-title" style="color: var(--color-white);">Chikitsak <span class="text-gradient">AI</span></span>
+          </div>
+          <p>AI-powered symptom analysis and explanation.</p>
+          <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--color-navy-400);">
+            Empowering patients with clear symptom understanding backed by clinical ML algorithms.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul>
+            <li><a data-action="start-assessment" style="cursor: pointer;">Symptom Assessment</a></li>
+            <li><a data-action="scroll-how-it-works" style="cursor: pointer;">How It Works</a></li>
+            <li><a data-action="scroll-about" style="cursor: pointer;">Architecture & Models</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Compliance & Safety</h5>
+          <ul>
+            <li><span style="color: var(--color-navy-400);">Non-Diagnostic Tool</span></li>
+            <li><span style="color: var(--color-navy-400);">Zero Prescriptions Rule</span></li>
+            <li><span style="color: var(--color-navy-400);">HIPAA / Privacy Respecting</span></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Chikitsak AI. All rights reserved. For educational and triage assistance only.</div>
+        <div>Trained SVM (132 Biomarkers) &bull; Google Gemini 3.8 Flash</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       API CONFIGURATION MODAL
+       ======================================================================== -->
+  <div id="api-config-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h4><i data-lucide="settings" style="vertical-align: middle;"></i> Python Backend Settings</h4>
+        <button type="button" id="close-api-modal" style="background: none; border: none; cursor: pointer; color: var(--color-navy-600);">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <p style="font-size: 0.88rem; color: var(--color-navy-600); margin-bottom: 1.25rem;">
+        Configure the Python API endpoint. By default, it connects to <code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px;">http://127.0.0.1:5000</code>.
+      </p>
+      <div style="margin-bottom: 1.5rem;">
+        <label for="api-url-input" style="display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.4rem;">Backend Base URL</label>
+        <input type="text" id="api-url-input" class="search-input" value="http://127.0.0.1:5000" style="padding-left: 1rem;" />
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button type="button" id="save-api-url-btn" class="btn btn-primary">Save & Connect</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    // Initialize Lucide icons on window load
+    window.addEventListener('load', () => {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+             USER
+               │
+               ▼
+      Enter symptoms
+   "fever, cough, headache"
+               │
+               ▼
+       ┌────────────────┐
+       │ Preprocessing  │
+       │ Encode symptoms│
+       └───────┬────────┘
+               │
+               ▼
+       ┌────────────────┐
+       │   ML MODEL     │
+       │ Random Forest  │
+       │ / XGBoost etc. │
+       └───────┬────────┘
+               │
+               ▼
+       Predicted condition
+       e.g. "Influenza"
+               │
+               ▼
+       ┌────────────────┐
+       │   Gemini API   │
+       │ Explanation +  │
+       │ user-friendly  │
+       │ response       │
+       └───────┬────────┘
+               │
+               ▼
+            USER
